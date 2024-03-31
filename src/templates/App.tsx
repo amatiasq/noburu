@@ -30,7 +30,7 @@ function Header() {
 
   return (
     <Grid templateColumns="auto 1fr" alignItems="baseline" marginBottom={8}>
-      <Heading as="h1">Soliluna</Heading>
+      <Heading as="h1">Noburu</Heading>
       <Grid
         as="nav"
         justifyContent="center"
