@@ -21,8 +21,8 @@ export const pages: PageDescription[] = [
     Component: RecipeList,
   },
   {
-    path: '/pasteles',
-    title: 'Pasteles',
+    path: '/platos',
+    title: 'Platos',
     Component: CakeList,
   },
 ];

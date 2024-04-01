@@ -29,7 +29,7 @@ export function CakeList() {
 
   async function create() {
     const item = await add({
-      name: 'Nuevo pastel',
+      name: 'Nuevo plato',
       pax: '' as any,
       cost: 0,
       multiplier: 4,
@@ -37,23 +37,23 @@ export function CakeList() {
       ingredients: [],
     });
 
-    navigate(`/pasteles/${item.id}`);
+    navigate(`/platos/${item.id}`);
   }
 
   return (
-    <SilList title="Pasteles" addLabel="Añadir pastel" add={create}>
+    <SilList title="Platos" addLabel="Añadir plato" add={create}>
       {list.map((x) => (
         <SilListItem
           key={x.id}
           name={x.name || '(sin nombre)'}
           remove={() => remove(x)}
-          removeLabel={`Borrar pastel ${x.name || ''}`}
+          removeLabel={`Borrar plato ${x.name || ''}`}
           tag={[
             printUnit(x.cost * x.multiplier, '€'),
             printDate(x.date?.toDate()),
             `${x.pax || '0'} PAX`,
           ]}
-          url={`/pasteles/${x.id}`}
+          url={`/platos/${x.id}`}
         >
           {x.recipes.map((y) => (
             <NiceTag

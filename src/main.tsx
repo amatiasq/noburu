@@ -34,7 +34,7 @@ root.render(
           ))}
 
           <Route path="/recetas/:id" element={withAuth(<RecipeView />)} />
-          <Route path="/pasteles/:id" element={withAuth(<CakeView />)} />
+          <Route path="/platos/:id" element={withAuth(<CakeView />)} />
           <Route path="/export" element={withAuth(<ExportData />)} />
         </Route>
       </Routes>
