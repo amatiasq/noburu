@@ -12,6 +12,7 @@ import {
 import { useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import { RequiredIngredients } from '../components-smart/RequiredIngredients';
+import { RequiredRecipes } from '../components-smart/RequiredRecipes';
 import { AutoSaveForm } from '../components/AutoSaveForm';
 import { AutoSaveFormStatus } from '../components/AutoSaveFormStatus';
 import { bindControl } from '../components/Control';
@@ -24,8 +25,10 @@ import { useFire } from '../hooks/useFire';
 import { useFireList } from '../hooks/useFireList';
 import { Ingredient } from '../model/Ingredient';
 import { calculateIngredientsCost } from '../model/IngredientUsage';
-import { Recipe, RecipeId } from '../model/Recipe';
+import { Recipe } from '../model/Recipe';
+import type { RecipeId } from '../model/RecipeId';
 import { RecipeUnit } from '../model/RecipeUnit';
+import { calculateRecipesCost } from '../model/RecipeUsage';
 import { capitalise } from '../util/capitalise';
 
 const RecipeControl = bindFormControl<Recipe>();
@@ -37,6 +40,7 @@ export function RecipeView() {
   const { id } = useParams<{ id: RecipeId }>();
   const { isLoading, data, set } = useFire<Recipe>('recetas', id!);
   const ingredients = useFireList<Ingredient>('ingredientes');
+  const recipes = useFireList<Recipe>('recetas');
 
   const save = useCallback(
     (values: Recipe) => set({ ...values, name: capitalise(values.name) }),
@@ -55,10 +59,10 @@ export function RecipeView() {
       onSubmit={save}
     >
       {({ values }) => {
-        values.cost = calculateIngredientsCost(
-          values.ingredients,
-          ingredients.data
-        );
+        values.recipes ??= [];
+        values.cost =
+          calculateIngredientsCost(values.ingredients, ingredients.data) +
+          calculateRecipesCost(id!, values.recipes, recipes.data);
 
         return (
           <VStack align="stretch">
@@ -96,6 +100,7 @@ export function RecipeView() {
               </FormControl>
             </Grid>
 
+            <RequiredRecipes />
             <RequiredIngredients />
           </VStack>
         );

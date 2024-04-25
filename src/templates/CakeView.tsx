@@ -98,7 +98,8 @@ function CakeForm({ values }: { values: Cake }) {
           as={Textarea}
         />
 
-        <RequiredRecipes gridArea="recipes" pax={values.pax} />
+        <RequiredRecipes gridArea="recipes" />
+        {/* pax={values.pax} */}
         <RequiredIngredients gridArea="ingredients" />
 
         <FormControl gridArea="cost">

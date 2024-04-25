@@ -1,9 +1,6 @@
 import { z } from 'zod';
-import {
-  calculateIngredientCost,
-  Ingredient,
-  IngredientId,
-} from './Ingredient';
+import { calculateIngredientCost, Ingredient } from './Ingredient';
+import { IngredientId } from './IngredientId';
 import { convert, smallestUnit, Unit } from './Unit';
 
 export interface IngredientUsage {

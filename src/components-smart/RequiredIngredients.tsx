@@ -13,11 +13,8 @@ import { FormList } from '../components/FormList';
 import { Loading } from '../components/Loading';
 import { NumberInput } from '../components/NumberInput';
 import { useFireList } from '../hooks/useFireList';
-import {
-  calculateIngredientCost,
-  Ingredient,
-  IngredientId,
-} from '../model/Ingredient';
+import { calculateIngredientCost, Ingredient } from '../model/Ingredient';
+import type { IngredientId } from '../model/IngredientId';
 import { ingredientToUsage, IngredientUsage } from '../model/IngredientUsage';
 import { getConversionsFor } from '../model/Unit';
 import { focusNextInput } from '../util/focusNextInput';

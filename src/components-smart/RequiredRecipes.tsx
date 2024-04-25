@@ -16,7 +16,8 @@ import { NumberInput } from '../components/NumberInput';
 import { useFireList } from '../hooks/useFireList';
 import { Ingredient } from '../model/Ingredient';
 import { calculateIngredientsCost } from '../model/IngredientUsage';
-import { calculateRecipeCost, Recipe, RecipeId } from '../model/Recipe';
+import { calculateRecipeCost, Recipe } from '../model/Recipe';
+import type { RecipeId } from '../model/RecipeId';
 import { RecipeUsage } from '../model/RecipeUsage';
 import { focusNextInput } from '../util/focusNextInput';
 import { unkonwnEntity } from '../util/unknownEntity';
@@ -24,7 +25,7 @@ import { ShowIngredientUsage } from './ShowIngredientUsage';
 
 export interface RequiredRecipesProps {
   gridArea?: string;
-  pax: number;
+  // pax: number;
 }
 
 const RecipeControl = bindControl<RecipeUsage, `recipes.${number}.`>();
@@ -43,7 +44,7 @@ export function RequiredRecipes({ gridArea }: RequiredRecipesProps) {
 
   const getRecipe = (id: RecipeId) => data.find((x) => x.id === id)!;
   const names = data.map((x) => ({ value: x.id, label: x.name }));
-  const [{ ingredients: _, ...defaultRecipe }] = data;
+  const [{ ingredients: _1, recipes: _2, ...defaultRecipe }] = data;
 
   return (
     <FormList<RecipeUsage>
@@ -64,7 +65,7 @@ export function RequiredRecipes({ gridArea }: RequiredRecipesProps) {
           return null;
         }
 
-        console.log(item);
+        // console.log(item);
 
         recipe.cost = calculateIngredientsCost(
           recipe.ingredients,
@@ -95,7 +96,7 @@ export function RequiredRecipes({ gridArea }: RequiredRecipesProps) {
               // Chakra knows that but for some reason typescript complains
               // @ts-ignore see above
               options={names}
-              isInvalid={isDuplicated}
+              isInvalid={isDuplicated || item.recursive}
               onChange={(event) => {
                 const newRecipeId = event.target.value as RecipeId;
                 const { ingredients: _, ...newRecipe } = getRecipe(newRecipeId);

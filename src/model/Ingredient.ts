@@ -1,8 +1,6 @@
 import { z } from 'zod';
+import type { IngredientId } from './IngredientId';
 import { convert, Unit } from './Unit';
-
-export type IngredientId = `snowflake IngredientId`;
-export const IngredientId = z.string() as unknown as z.ZodEnum<[IngredientId]>;
 
 export interface Ingredient {
   id: IngredientId;

@@ -26,6 +26,7 @@ export function RecipeList() {
       cost: 0,
       amount: 8,
       unit: RecipeUnit[0],
+      recipes: [],
       ingredients: [],
     });
     navigate(`/recetas/${item.id}`);

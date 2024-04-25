@@ -14,7 +14,8 @@ import { Dropdown } from '../components/Dropdown';
 import { Loading } from '../components/Loading';
 import { NumberInput } from '../components/NumberInput';
 import { useFire } from '../hooks/useFire';
-import { Ingredient, IngredientId } from '../model/Ingredient';
+import { Ingredient } from '../model/Ingredient';
+import type { IngredientId } from '../model/IngredientId';
 import { Unit } from '../model/Unit';
 import { capitalise } from '../util/capitalise';
 

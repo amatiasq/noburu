@@ -73,7 +73,7 @@ export function FormList<T>({
             </FormControl>
 
             <Stack direction="column" align="stretch" {...stackProps}>
-              {value.map((item, index) => {
+              {(value ?? []).map((item, index) => {
                 const handleRemove = onRemove
                   ? () => {
                       onRemove(item, index);
